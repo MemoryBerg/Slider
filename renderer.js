@@ -5,6 +5,7 @@ const defaultObj = {
 
 
 function render(args, parentNode) {
+
     let { tagName, children, text, html, attrs } = {
         ...defaultObj,
         ...args
@@ -20,7 +21,6 @@ function render(args, parentNode) {
             render(item, newElement);
         });
     }
-    {
         html !== undefined
             ? (newElement.innerHTML = html)
             : (newElement.innerText = text);
@@ -31,8 +31,9 @@ function render(args, parentNode) {
                 newElement.setAttribute(key, attrs[key]);
             }
         }
-    }
+
     parentNode.appendChild(newElement);
+
     return newElement;
 }
 
