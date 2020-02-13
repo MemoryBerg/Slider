@@ -132,6 +132,17 @@ function circleSlide() {
 let slider = new Slide();
 //slideLeft.move();
 //slideLeft.circleSlide();
+/*
+document.getElementById('buttonPrev').addEventListener('click', () => {
+    slider.moveSliderLeft(-200);
+});
+
+
+document.getElementById('buttonNext').addEventListener('click', () => {
+    slider.moveSliderRight(200);
+});
+
+ */
 document.getElementById('buttonPrev').addEventListener('click', () => {
     slider.moveSliderLeft(-200);
 });
@@ -139,6 +150,9 @@ document.getElementById('buttonPrev').addEventListener('click', () => {
 document.getElementById('buttonNext').addEventListener('click', () => {
     slider.moveSliderRight(200);
 });
-slider.autoSlide(slider.moveSliderLeft, 2000);
+
+//slider.autoSlide(slider.moveSliderLeft, 2000);
+
+
 
 

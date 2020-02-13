@@ -1,5 +1,6 @@
 let sliderList = document.getElementById('sliderList');
 let startElem;
+let lastElem;
 let timer;
 
 
@@ -17,55 +18,42 @@ class Slide {
 
         sliderList.style.transform = 'translateX(' + direction + 'px)';
 
-        sliderList.addEventListener('transitionend', this.circleSlideLeft);
+        sliderList.addEventListener('transitionend', () => this.circleSlide(-1));
 
-        this.autoSlide(this.moveSliderLeft, 2000);
+        //this.autoSlide(this.moveSliderLeft, 2000);
 
     }
 
     moveSliderRight(direction) {
         sliderList.style.transform = 'translateX(' + direction + 'px)';
 
-        sliderList.addEventListener('transitionend', this.circleSlideRight);
+        sliderList.addEventListener('transitionend', () => this.circleSlide(1));
 
-        this.autoSlide(this.moveSliderLeft, 2000);
+        //this.autoSlide(this.moveSliderLeft, 2000);
 
     }
-
+/*
     circleSlideLeft() {
         sliderList.style.transition = 'none';
-
         startElem = document.getElementsByClassName('slider__slide')[0];
-
-        console.log(startElem);
-
         sliderList.removeChild(startElem);
-
         sliderList.append(startElem);
-
         sliderList.style.transform = 'translate(0, 0)';
-
+        console.log(sliderList);
 
         setTimeout(function () {
             sliderList.style.transition = '';
-
-
         });
     }
 
     circleSlideRight() {
         sliderList.style.transition = 'none';
-
-        startElem = document.getElementsByClassName('slider__slide');
-        startElem = startElem[startElem.length - 1];
-        console.log(startElem);
-        sliderList.prepend(startElem);
-
-        sliderList.removeChild(startElem);
-
-
+        lastElem = document.getElementsByClassName('slider__slide');
+        lastElem = lastElem[lastElem.length - 1];
+        sliderList.removeChild(lastElem);
+        sliderList.prepend(lastElem);
         sliderList.style.transform = 'translate(0, 0)';
-
+        console.log(sliderList);
 
         setTimeout(function () {
             sliderList.style.transition = '';
@@ -73,9 +61,34 @@ class Slide {
 
     }
 
+ */
+    circleSlide(side) {
+        sliderList.style.transition = 'none';
+        console.log(Math.sign(side));
+        if(Math.sign(side) == -1) {
+            startElem = document.getElementsByClassName('slider__slide')[0];
+            sliderList.removeChild(startElem);
+            sliderList.append(startElem);
+            console.log(startElem);
+        } else if (Math.sign(side) == 1) {
+            lastElem = document.getElementsByClassName('slider__slide');
+            lastElem = lastElem[lastElem.length - 1];
+            sliderList.removeChild(lastElem);
+            sliderList.prepend(lastElem);
+            console.log(lastElem);
+        }
+
+        sliderList.style.transform = 'translate(0, 0)';
+        console.log(sliderList);
+
+        setTimeout(function () {
+            sliderList.style.transition = '';
+        });
+    }
+
 
     autoSlide(method, ms) {
-        return timer = setTimeout(method, ms);
+        timer = setTimeout(method, ms);
     }
 
 }
