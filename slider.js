@@ -71,18 +71,17 @@ cats.renderNodes(catsSlider, sliderParent);
  */
 
 let left = 0;
-let timer;
-let sliderList = document.getElementById('sliderList');
-let ms = 2000;
+//let sliderList = document.getElementById('sliderList');
 
-document.getElementById('buttonPrev').addEventListener('click', slideRight);
-document.getElementById('buttonNext').addEventListener('click', slideLeft);
+//document.getElementById('buttonNext').addEventListener('click', slideLeft);
 
-autoLeafing(ms);
+// autoLeafing(ms);
+//
+// function autoLeafing(ms) {
+//     timer = setTimeout(slideLeft, ms)
+// }
 
-function autoLeafing(ms) {
-    timer = setTimeout(slideLeft, ms)
-}
+/*
 function slideLeft() {
 
     left = - 200;
@@ -101,9 +100,13 @@ function slideRight() {
 
     sliderList.style.transform = 'translateX(' + left + 'px)';
 
+    clearTimeout(autoLeafing);
+
 }
 
+*/
 
+/*
 function circleSlide() {
 
     sliderList.style.transition = 'none';
@@ -123,4 +126,19 @@ function circleSlide() {
 
     })
 }
+
+ */
+
+let slider = new Slide();
+//slideLeft.move();
+//slideLeft.circleSlide();
+document.getElementById('buttonPrev').addEventListener('click', () => {
+    slider.moveSliderLeft(-200);
+});
+
+document.getElementById('buttonNext').addEventListener('click', () => {
+    slider.moveSliderRight(200);
+});
+slider.autoSlide(slider.moveSliderLeft, 2000);
+
 
