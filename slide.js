@@ -8,22 +8,37 @@ class Slide {
     /**
      *
      * @param {number} direction
+     * @param {number} visiblePics
      */
     // constructor(direction) {
     //     this.direction = direction;
     // }
 
+    constructor(visiblePics) {
+        this.visiblePics = visiblePics;
 
-     moveSliderLeft(direction) {
+        let toolbar = document.getElementById('slider__toolbar');
+        let field = document.getElementById('slider');
+        toolbar.style.width = (visiblePics * 200) + ((visiblePics - 1) * 1) + 'px';
+        field.style.width = toolbar.style.width + 90 + 'px';
+    }
+
+
+     moveSlider(direction) {
 
         sliderList.style.transform = 'translateX(' + direction + 'px)';
 
-        sliderList.addEventListener('transitionend', () => this.circleSlide(-1));
-
+        if(Math.sign(direction) === -1) {
+            sliderList.addEventListener('transitionend', () => this.circleSlide(-1));
+        } else if(Math.sign(direction) === 1) {
+            sliderList.addEventListener('transitionend', () => this.circleSlide(1));
+        }
         //this.autoSlide(this.moveSliderLeft, 2000);
 
     }
 
+
+/*
     moveSliderRight(direction) {
         sliderList.style.transform = 'translateX(' + direction + 'px)';
 
@@ -32,6 +47,8 @@ class Slide {
         //this.autoSlide(this.moveSliderLeft, 2000);
 
     }
+
+ */
 /*
     circleSlideLeft() {
         sliderList.style.transition = 'none';
@@ -62,22 +79,22 @@ class Slide {
     }
 
  */
+
     circleSlide(side) {
-        sliderList.style.transition = 'none';
+       sliderList.style.transition = 'none';
         console.log(Math.sign(side));
-        if(Math.sign(side) == -1) {
+        if(Math.sign(side) === -1) {
             startElem = document.getElementsByClassName('slider__slide')[0];
             sliderList.removeChild(startElem);
             sliderList.append(startElem);
             console.log(startElem);
-        } else if (Math.sign(side) == 1) {
+        } else if (Math.sign(side) === 1) {
             lastElem = document.getElementsByClassName('slider__slide');
             lastElem = lastElem[lastElem.length - 1];
             sliderList.removeChild(lastElem);
             sliderList.prepend(lastElem);
             console.log(lastElem);
         }
-
         sliderList.style.transform = 'translate(0, 0)';
         console.log(sliderList);
 

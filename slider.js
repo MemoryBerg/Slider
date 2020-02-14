@@ -129,7 +129,7 @@ function circleSlide() {
 
  */
 
-let slider = new Slide();
+let slider = new Slide(3);
 //slideLeft.move();
 //slideLeft.circleSlide();
 /*
@@ -144,11 +144,11 @@ document.getElementById('buttonNext').addEventListener('click', () => {
 
  */
 document.getElementById('buttonPrev').addEventListener('click', () => {
-    slider.moveSliderLeft(-200);
+    slider.moveSlider(-200);
 });
 
 document.getElementById('buttonNext').addEventListener('click', () => {
-    slider.moveSliderRight(200);
+    slider.moveSlider(200);
 });
 
 //slider.autoSlide(slider.moveSliderLeft, 2000);

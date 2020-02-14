@@ -8,7 +8,6 @@ h2 {
 }
 
 .slider {
-  width: 750px;
   height: 300px;
   background-color: lightblue;
   margin: 0 auto;
@@ -31,11 +30,10 @@ h2 {
 }
 .slider .slider__toolbar {
   overflow: hidden;
-  width: 600px;
   display: inline-block;
 }
 .slider .slider__list {
-  width: 1050px;
+  width: 1450px;
   transition: all ease 1s;
 }
 .slider .slider__list::after {
