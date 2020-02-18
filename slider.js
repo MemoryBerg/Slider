@@ -1,4 +1,5 @@
-class Slider {
+/* class Slider {
+
     constructor (obj) {
         let {parentNode, slides, showSlides, sliderTime} = obj;
         this.parentNode = parentNode;
@@ -70,7 +71,7 @@ cats.renderNodes(catsSlider, sliderParent);
 
  */
 
-let left = 0;
+//let left = 0;
 //let sliderList = document.getElementById('sliderList');
 
 //document.getElementById('buttonNext').addEventListener('click', slideLeft);
@@ -129,6 +130,7 @@ function circleSlide() {
 
  */
 
+
 let slider = new Slide(3);
 //slideLeft.move();
 //slideLeft.circleSlide();
@@ -143,16 +145,18 @@ document.getElementById('buttonNext').addEventListener('click', () => {
 });
 
  */
-document.getElementById('buttonPrev').addEventListener('click', () => {
-    slider.moveSlider(-200);
-});
 
-document.getElementById('buttonNext').addEventListener('click', () => {
-    slider.moveSlider(200);
-});
+document.getElementById('buttonPrev').addEventListener('click', wrapperLeft);
+document.getElementById('buttonNext').addEventListener('click', wrapperRight);
 
 //slider.autoSlide(slider.moveSliderLeft, 2000);
 
 
+function wrapperLeft() {
+    slider.moveSlider(-200);
+}
 
+function wrapperRight() {
+    slider.moveSlider(200);
+}
 

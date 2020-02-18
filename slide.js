@@ -1,4 +1,6 @@
 let sliderList = document.getElementById('sliderList');
+let toolbar = document.getElementById('slider__toolbar');
+let field = document.getElementById('slider');
 let startElem;
 let lastElem;
 let timer;
@@ -17,8 +19,6 @@ class Slide {
     constructor(visiblePics) {
         this.visiblePics = visiblePics;
 
-        let toolbar = document.getElementById('slider__toolbar');
-        let field = document.getElementById('slider');
         toolbar.style.width = (visiblePics * 200) + ((visiblePics - 1) * 1) + 'px';
         field.style.width = toolbar.style.width + 90 + 'px';
     }
@@ -29,11 +29,17 @@ class Slide {
         sliderList.style.transform = 'translateX(' + direction + 'px)';
 
         if(Math.sign(direction) === -1) {
-            sliderList.addEventListener('transitionend', () => this.circleSlide(-1));
+            sliderList.removeEventListener('transitioned', wrapperCirclePositive);
+            sliderList.removeEventListener('transitioned', wrapperCircleNegative);
+            sliderList.addEventListener('transitionend', wrapperCircleNegative);
         } else if(Math.sign(direction) === 1) {
-            sliderList.addEventListener('transitionend', () => this.circleSlide(1));
+            sliderList.removeEventListener('transitioned', wrapperCircleNegative);
+            sliderList.removeEventListener('transitioned', wrapperCirclePositive);
+            sliderList.addEventListener('transitionend', wrapperCirclePositive);
         }
-        //this.autoSlide(this.moveSliderLeft, 2000);
+
+
+         //this.autoSlide(this.moveSliderLeft, 2000);
 
     }
 
@@ -80,28 +86,6 @@ class Slide {
 
  */
 
-    circleSlide(side) {
-       sliderList.style.transition = 'none';
-        console.log(Math.sign(side));
-        if(Math.sign(side) === -1) {
-            startElem = document.getElementsByClassName('slider__slide')[0];
-            sliderList.removeChild(startElem);
-            sliderList.append(startElem);
-            console.log(startElem);
-        } else if (Math.sign(side) === 1) {
-            lastElem = document.getElementsByClassName('slider__slide');
-            lastElem = lastElem[lastElem.length - 1];
-            sliderList.removeChild(lastElem);
-            sliderList.prepend(lastElem);
-            console.log(lastElem);
-        }
-        sliderList.style.transform = 'translate(0, 0)';
-        console.log(sliderList);
-
-        setTimeout(function () {
-            sliderList.style.transition = '';
-        });
-    }
 
 
     autoSlide(method, ms) {
@@ -144,3 +128,32 @@ class Slide {
 //     timer = setTimeout(method, ms);
 //
 // }
+function circleSlide(side) {
+    sliderList.style.transition = 'none';
+    console.log(Math.sign(side));
+    if(Math.sign(side) === -1) {
+        startElem = document.getElementsByClassName('slider__slide')[0];
+        sliderList.removeChild(startElem);
+        sliderList.append(startElem);
+        console.log(startElem);
+    } else if (Math.sign(side) === 1) {
+        lastElem = document.getElementsByClassName('slider__slide');
+        lastElem = lastElem[lastElem.length - 1];
+        sliderList.removeChild(lastElem);
+        sliderList.prepend(lastElem);
+        console.log(lastElem);
+    }
+    sliderList.style.transform = 'translate(0, 0)';
+    console.log(sliderList);
+
+    setTimeout(function () {
+        sliderList.style.transition = '';
+    });
+}
+
+function wrapperCircleNegative() {
+    return circleSlide(-1);
+}
+function wrapperCirclePositive() {
+    return circleSlide(1);
+}
