@@ -1,5 +1,5 @@
 /* class Slider {
-
+test
     constructor (obj) {
         let {parentNode, slides, showSlides, sliderTime} = obj;
         this.parentNode = parentNode;
